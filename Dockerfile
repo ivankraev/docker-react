@@ -9,6 +9,8 @@ RUN npm run build
 
 
 FROM nginx
+## in development mode doesnt matter but elastik beanstalk use this
+EXPOSE 80
 ## we copy the build forlder to the nginx folder which is specific for serving static html files.
 COPY --from=builder /app/build usr/share/nginx/html
 

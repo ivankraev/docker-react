@@ -7,3 +7,17 @@ before_install:
 
 script:
   - docker run -e CI=true docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  ## we take the name from the aws --> the name of the beanstalk resource
+  app: docker-react
+  env: "Docker-env"
+  bucket_name: "the bucket that was generated when u created the beanstalk app"
+  bucket_path: docker-react
+  on:
+    branch: master
+  ## we take those variables from travis secrets
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
